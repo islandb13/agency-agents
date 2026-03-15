@@ -780,6 +780,10 @@
   Format: structured report, ready to paste into Month 2 planning doc.
   ```
 - **Output:** Save to `reports/30-day-report.md`.
+- **Payment timing note:** Per affiliate terms, commissions are paid on the 1st of the month,
+  at least 30 days after a trial converts to paid, with a $50 minimum threshold. No payments
+  will have been received by Day 30 — the report should track signups and projected commission,
+  not cash received. First payment is realistically Month 3.
 
 ---
 
@@ -798,7 +802,10 @@
   - Writesonic for agencies vs. individual creators
   - Writesonic GEO features for AI search ranking (ChatGPT/Perplexity visibility)
   - YouTube long-form review (adapt top TikTok scripts as outline)
-  - Paid Reddit promotion test (Reddit Ads targeting r/entrepreneur and r/SEO)
+  - Paid Reddit/social promotion test — generic keywords only (e.g. "AI writing tools",
+    "AI affiliate programs"); branded keywords (Writesonic, Chatsonic, Botsonic,
+    Photosonic) and combos (e.g. "Writesonic review", "Writesonic pricing") are
+    PROHIBITED under affiliate terms and will result in immediate account cancellation.
 
   Deliverable:
   - 4-week roadmap for Month 2 with the same sprint structure
