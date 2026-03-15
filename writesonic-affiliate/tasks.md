@@ -69,7 +69,7 @@
   End with a CTA button placeholder: [Try Writesonic — 30% recurring affiliate commission]
   Include FTC disclosure: "I earn a commission if you sign up through my link."
   ```
-- **Output:** Live URL for the hub page. Update TikTok bio with this URL.
+- **Output:** https://writeaudit.com — hub page is live. Update TikTok bio with this URL.
 
 ---
 
@@ -195,7 +195,7 @@
   > **Psychology:** Authenticity signal. "Two months of testing" implies rigor, not impulse.
   > **Hashtags:** `#writesonic #aiwriting #affiliatemarketing #sidehustle #contentcreator`
 - **Publish checklist:**
-  - [ ] Bio link updated to hub page URL (from WS-003)
+  - [ ] Bio link updated to https://writeaudit.com (from WS-003)
   - [ ] UTM link used: `tiktok-hook3`
   - [ ] FTC disclosure included verbally and as `#ad` in caption
   - [ ] Posted at recommended time
@@ -358,7 +358,7 @@
 - **UTM link to use:** `tiktok-hook1`
 - **Publish checklist:**
   - [ ] FTC disclosure verbal + `#ad` in caption
-  - [ ] Bio link = hub page URL
+  - [ ] Bio link = https://writeaudit.com
 
 ---
 
