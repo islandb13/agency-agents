@@ -32,7 +32,18 @@
 - **Day:** 1
 - **Status:** `[ ]`
 - **Depends on:** WS-001
+- **UTM naming convention:**
+
+  | Parameter | Answers | Rule |
+  |---|---|---|
+  | `utm_source` | *Where* is traffic from? | Platform name (`reddit`, `tiktok`, `hub`) |
+  | `utm_medium` | *How* was the link surfaced? | Mechanism (`comment`, `bio-link`, `cta-button`) |
+  | `utm_campaign` | *Which campaign?* | Always `jasper-alternative` — identical across all channels for cross-channel roll-up |
+  | `utm_content` | *Which specific piece?* | Subreddit name, hook slug, or hub section |
+
 - **Details:** Create one unique affiliate link per traffic source using UTM parameters:
+
+  **Reddit**
 
   | Link alias | UTM string |
   |---|---|
@@ -41,13 +52,26 @@
   | reddit-entrepreneur | `utm_source=reddit&utm_medium=comment&utm_campaign=jasper-alternative&utm_content=entrepreneur` |
   | reddit-seo | `utm_source=reddit&utm_medium=comment&utm_campaign=jasper-alternative&utm_content=seo` |
   | reddit-digitalmarketing | `utm_source=reddit&utm_medium=comment&utm_campaign=jasper-alternative&utm_content=digitalmarketing` |
-  | tiktok-hook1 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=hook1` |
-  | tiktok-hook2 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=hook2` |
-  | tiktok-hook3 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=hook3` |
-  | tiktok-hook4 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=hook4` |
-  | tiktok-hook5 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=hook5` |
 
-- **Output:** Save all links in a password manager or Notion doc. Never post raw affiliate URLs in Reddit comments — always route through your review page.
+  **TikTok** — hook identity moves to `utm_content`; `utm_campaign` stays consistent so all TikTok rolls up alongside Reddit.
+
+  | Link alias | UTM string |
+  |---|---|
+  | tiktok-hook1 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=jasper-alternative&utm_content=hook1-income-loss` |
+  | tiktok-hook2 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=jasper-alternative&utm_content=hook2-pattern-interrupt` |
+  | tiktok-hook3 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=jasper-alternative&utm_content=hook3-personal-narrative` |
+  | tiktok-hook4 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=jasper-alternative&utm_content=hook4-educational` |
+  | tiktok-hook5 | `utm_source=tiktok&utm_medium=bio-link&utm_campaign=jasper-alternative&utm_content=hook5-comparison` |
+
+  **Hub page (writeaudit.com)** — place on each CTA button so you can see which section converts.
+
+  | Link alias | UTM string |
+  |---|---|
+  | hub-hero-cta | `utm_source=hub&utm_medium=cta-button&utm_campaign=jasper-alternative&utm_content=hero` |
+  | hub-comparison-table | `utm_source=hub&utm_medium=cta-button&utm_campaign=jasper-alternative&utm_content=comparison-table` |
+  | hub-bottom-cta | `utm_source=hub&utm_medium=cta-button&utm_campaign=jasper-alternative&utm_content=bottom` |
+
+- **Output:** Save all links in a password manager or Notion doc. Never post raw affiliate URLs in Reddit comments — always route through writeaudit.com. Hub page links are the exception — those live on the hub itself.
 
 ---
 
