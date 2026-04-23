@@ -129,10 +129,12 @@ class MomRescueBuilder:
         def s(name, **kw):
             return ParagraphStyle(name, **kw)
         return {
-            'cover_title': s('ct', fontSize=32, textColor=HexColor('#6B2D5E'),
-                             alignment=TA_CENTER, spaceAfter=8, fontName='Helvetica-Bold'),
-            'cover_sub':   s('cs', fontSize=16, textColor=HexColor('#B76E79'),
-                             alignment=TA_CENTER, spaceAfter=6, fontName='Helvetica-Oblique'),
+            'cover_title': s('ct', fontSize=28, leading=35,
+                             textColor=HexColor('#6B2D5E'), alignment=TA_CENTER,
+                             spaceAfter=30, fontName='Helvetica-Bold', charSpace=1.5),
+            'cover_sub':   s('cs', fontSize=16, leading=20,
+                             textColor=HexColor('#B76E79'),
+                             alignment=TA_CENTER, spaceAfter=10, fontName='Helvetica-Oblique'),
             'cover_price': s('cp', fontSize=22, textColor=HexColor('#D4A574'),
                              alignment=TA_CENTER, spaceAfter=4, fontName='Helvetica-Bold'),
             'cover_tag':   s('cg', fontSize=11, textColor=HexColor('#3A3A3A'),
@@ -140,7 +142,8 @@ class MomRescueBuilder:
             'section_hdr': s('sh', fontSize=14, textColor=HexColor('#6B2D5E'),
                              alignment=TA_CENTER, spaceBefore=10, spaceAfter=6,
                              fontName='Helvetica-Bold'),
-            'body':        s('bd', fontSize=10, textColor=HexColor('#3A3A3A'),
+            'body':        s('bd', fontSize=10, leading=14,
+                             textColor=HexColor('#3A3A3A'),
                              alignment=TA_LEFT, fontName='Helvetica'),
             'day_hdr':     s('dh', fontSize=9, textColor=white,
                              alignment=TA_CENTER, fontName='Helvetica-Bold'),
