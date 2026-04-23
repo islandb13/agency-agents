@@ -206,9 +206,13 @@ class MomRescueBuilder:
         canv.setLineWidth(0.4)
         canv.line(m, h - m - 0.12*inch, w - m, h - m - 0.12*inch)
 
-        # Logo (embedded if present)
-        if os.path.exists(Brand.LOGO):
-            canv.drawImage(Brand.LOGO, m + 4, h - m - 0.44*inch,
+        # Logo: prefer PNG (transparent bg) over JPEG
+        _logo = next((f for f in [
+            'mom-rescue-pack-logo.png',
+            Brand.LOGO,
+        ] if os.path.exists(f)), None)
+        if _logo:
+            canv.drawImage(_logo, m + 4, h - m - 0.44*inch,
                            width=0.30*inch, height=0.30*inch,
                            preserveAspectRatio=True, mask='auto')
 
@@ -263,7 +267,7 @@ class MomRescueBuilder:
         m    = Brand.MARGIN
 
         def on_page(c, doc):
-            self._header_footer(c, doc, "Last-Minute Dad's Gift Kit")
+            self._header_footer(c, doc, "Mom's Coupon Book")
 
         doc = SimpleDocTemplate(path, pagesize=letter,
                   leftMargin=0.75*inch, rightMargin=0.75*inch,
@@ -276,8 +280,8 @@ class MomRescueBuilder:
         else:
             self._skip_header_p1 = False
             story = self.create_cover_page(
-                "Last-Minute Dad's Gift Kit",
-                '8 Heartfelt Coupons for Mom',
+                "Mom's Coupon Book",
+                '8 Heartfelt Gift Coupons — Just for Her',
                 '$17',
                 'Because she deserves every single one.')
             story.append(PageBreak())
@@ -764,7 +768,7 @@ class MomRescueBuilder:
             'Thank you for choosing the Mom Rescue Pack. Designed with one goal: '
             'give moms the recognition, rest, and resources they deserve.<br/><br/>'
             '<b>Your 5-SKU bundle includes:</b><br/>'
-            '&bull; SKU 1 — Last-Minute Dad Gift Kit (Coupon Book)<br/>'
+            '&bull; SKU 1 — Mom’s Coupon Book (8 Heartfelt Gift Coupons)<br/>'
             '&bull; SKU 2 — Daily Sanity Planner (Self-Care Bundle)<br/>'
             '&bull; SKU 3 — Mother\'s Day Card Pack (5 A2 Foldable Cards)<br/>'
             '&bull; SKU 4 — Activity Pack (Interview + Scavenger Hunt)<br/>'
@@ -781,7 +785,7 @@ class MomRescueBuilder:
         os.makedirs(Brand.OUT, exist_ok=True)
         print('Mom Rescue Pack — Building all 5 SKUs...')
         for label, fn in [
-            ('SKU 1: Coupon Book',    self.build_coupon_book),
+            ('SKU 1: Mom\'s Coupon Book', self.build_coupon_book),
             ('SKU 2: Daily Planner',  self.build_daily_planner),
             ('SKU 3: Card Pack',      self.build_card_pack),
             ('SKU 4: Activity Pack',  self.build_activity_pack),
