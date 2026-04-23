@@ -124,6 +124,7 @@ class MomRescueBuilder:
 
     def __init__(self):
         self.styles = self._make_styles()
+        self._has_cover = False  # set True by create_cover_page
 
     def _make_styles(self):
         def s(name, **kw):
@@ -171,10 +172,10 @@ class MomRescueBuilder:
         # ── AI Premium Backgrounds (graceful fallback if absent) ─────────
         _cover_bg   = os.path.join('assets', 'backgrounds', 'cover_bg.png')
         _content_bg = os.path.join('assets', 'backgrounds', 'content_bg.png')
-        if doc.page == 1 and os.path.exists(_cover_bg):
+        if self._has_cover and doc.page == 1 and os.path.exists(_cover_bg):
             canv.drawImage(_cover_bg, 0, 0, width=w, height=h,
                           preserveAspectRatio=False, mask=None)
-        elif doc.page > 1 and os.path.exists(_content_bg):
+        elif os.path.exists(_content_bg) and not (self._has_cover and doc.page == 1):
             canv.drawImage(_content_bg, 0, 0, width=w, height=h,
                           preserveAspectRatio=False, mask=None)
 
@@ -210,6 +211,7 @@ class MomRescueBuilder:
         canv.restoreState()
 
     def create_cover_page(self, title, subtitle, price, tagline):
+        self._has_cover = True   # tells _header_footer page 1 is a cover
         s  = self.styles
         dk = os.path.exists(os.path.join('assets', 'backgrounds', 'cover_bg.png'))
         return [
@@ -228,6 +230,7 @@ class MomRescueBuilder:
 
     # ── SKU 1: Last-Minute Dad's Gift Kit — Coupon Book ($17) ──────────────────
     def build_coupon_book(self):
+        self._has_cover = False
         path = os.path.join(Brand.OUT, 'sku1_coupon_book.pdf')
         m    = Brand.MARGIN
 
@@ -272,6 +275,7 @@ class MomRescueBuilder:
 
     # ── SKU 2: Daily Sanity Planner — Self-Care Bundle ($27) ───────────────────
     def build_daily_planner(self):
+        self._has_cover = False
         path = os.path.join(Brand.OUT, 'sku2_daily_planner.pdf')
         m    = Brand.MARGIN
 
@@ -381,6 +385,7 @@ class MomRescueBuilder:
 
     # ── SKU 3: Mother's Day Card Pack — 5 A2 Foldable Cards ($9) ──────────────
     def build_card_pack(self):
+        self._has_cover = False
         from reportlab.pdfgen import canvas as pdfcanvas
         path = os.path.join(Brand.OUT, 'sku3_card_pack.pdf')
         PAGE = (5.5 * inch, 8.5 * inch)   # flat A2 sheet: fold at 4.25"
@@ -483,6 +488,7 @@ class MomRescueBuilder:
 
     # ── SKU 4: Activity Pack ($12) ─────────────────────────────────────────────
     def build_activity_pack(self):
+        self._has_cover = False
         path = os.path.join(Brand.OUT, 'sku4_activity_pack.pdf')
         m    = Brand.MARGIN
 
@@ -590,6 +596,7 @@ class MomRescueBuilder:
 
     # ── SKU 5: Mom Rescue Pack User Manual ($37) ───────────────────────────────
     def build_mom_manual(self):
+        self._has_cover = False
         path = os.path.join(Brand.OUT, 'sku5_mom_manual.pdf')
         m    = Brand.MARGIN
 
