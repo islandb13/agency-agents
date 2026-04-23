@@ -157,6 +157,16 @@ class MomRescueBuilder:
         canv.saveState()
         m, w, h = Brand.MARGIN, Brand.W, Brand.H
 
+        # ── AI Premium Backgrounds (graceful fallback if absent) ─────────
+        _cover_bg   = os.path.join('assets', 'backgrounds', 'cover_bg.png')
+        _content_bg = os.path.join('assets', 'backgrounds', 'content_bg.png')
+        if doc.page == 1 and os.path.exists(_cover_bg):
+            canv.drawImage(_cover_bg, 0, 0, width=w, height=h,
+                          preserveAspectRatio=False, mask=None)
+        elif doc.page > 1 and os.path.exists(_content_bg):
+            canv.drawImage(_content_bg, 0, 0, width=w, height=h,
+                          preserveAspectRatio=False, mask=None)
+
         # Plum header bar
         canv.setFillColor(Brand.PLUM)
         canv.rect(m, h - m - 0.45*inch, w - 2*m, 0.45*inch, fill=1, stroke=0)
@@ -546,9 +556,13 @@ class MomRescueBuilder:
         story.append(Spacer(1, 0.14*inch))
         story.append(Paragraph('This certifies that', s['cover_sub']))
         story.append(Spacer(1, 0.2*inch))
-        # Clean single name-line (no stacked rules)
-        story.append(HRFlowable(width=3.5*inch, thickness=1.0,
-                                color=Brand.ROSE_GOLD, spaceAfter=14))
+        # Name field: Table + LINEBELOW per project standards (premium, robust)
+        _cert_name = Table([['']], colWidths=[3.5*inch], rowHeights=[0.45*inch])
+        _cert_name.setStyle(TableStyle([
+            ('LINEBELOW', (0, 0), (0, 0), 1.5, Brand.ROSE_GOLD),
+        ]))
+        _cert_name.hAlign = 'CENTER'
+        story.append(_cert_name)
         story.append(Paragraph('is officially the', s['cover_sub']))
         story.append(Spacer(1, 0.1*inch))
         story.append(Paragraph("World's Greatest Mom", s['cover_title']))
