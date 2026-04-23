@@ -539,22 +539,26 @@ class MomRescueBuilder:
         story.append(PageBreak())
 
         # ── Page 3: Certificate of Appreciation ───────────────────────────────
-        story.append(Spacer(1, 0.8*inch))
-        story.append(HRFlowable(width='90%', thickness=2,
-                                color=Brand.GOLD, spaceAfter=20))
+        story.append(Spacer(1, 1.6*inch))   # vertical centre
+        story.append(HRFlowable(width='85%', thickness=2.5, color=Brand.GOLD,
+                                spaceAfter=22, lineCap='round'))
         story.append(Paragraph('Certificate of Appreciation', s['cover_title']))
+        story.append(Spacer(1, 0.14*inch))
         story.append(Paragraph('This certifies that', s['cover_sub']))
-        story.append(HRFlowable(width='60%', thickness=0.75,
-                                color=Brand.ROSE_GOLD, spaceAfter=6))
-        story.append(Paragraph('________________________________', s['cover_price']))
-        story.append(Paragraph('is officially the', s['cover_sub']))
-        story.append(Paragraph("World's Greatest Mom", s['cover_title']))
         story.append(Spacer(1, 0.2*inch))
+        # Clean single name-line (no stacked rules)
+        story.append(HRFlowable(width=3.5*inch, thickness=1.0,
+                                color=Brand.ROSE_GOLD, spaceAfter=14))
+        story.append(Paragraph('is officially the', s['cover_sub']))
+        story.append(Spacer(1, 0.1*inch))
+        story.append(Paragraph("World's Greatest Mom", s['cover_title']))
+        story.append(Spacer(1, 0.28*inch))
         story.append(Paragraph(
             'Awarded with love, gratitude, and absolutely zero conditions.',
             s['cover_tag']))
-        story.append(HRFlowable(width='90%', thickness=2,
-                                color=Brand.GOLD, spaceBefore=30))
+        story.append(Spacer(1, 0.38*inch))
+        story.append(HRFlowable(width='85%', thickness=2.5, color=Brand.GOLD,
+                                lineCap='round'))
         doc.build(story, onFirstPage=on_page, onLaterPages=on_page)
         print('  OK  SKU 4 ->', path)
 
