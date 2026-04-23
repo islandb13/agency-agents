@@ -6,6 +6,13 @@
       "env": {
         "NOTION_TOKEN": "${NOTION_TOKEN}"
       }
+    },
+    "nano-banana": {
+      "command": "npx",
+      "args": ["-y", "@easyuseai/nano-banana-pro-mcp"],
+      "env": {
+        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+      }
     }
   }
 }
