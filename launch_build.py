@@ -692,6 +692,8 @@ class MomRescueBuilder:
             ('FONTNAME',    (0,0), (-1,0), 'Helvetica-Bold'),
             ('FONTSIZE',    (0,0), (-1,-1), 9),
             ('ALIGN',       (0,0), (-1,-1), 'CENTER'),
+            ('ALIGN',       (1,1), (1,-1),  'LEFT'),
+            ('LEFTPADDING', (1,1), (1,-1),  14),
             ('VALIGN',      (0,0), (-1,-1), 'MIDDLE'),
             ('GRID',        (0,0), (-1,-1), 0.4, Brand.GOLD),
             ('BACKGROUND',  (0,1), (-1,-1), Brand.CREAM),
