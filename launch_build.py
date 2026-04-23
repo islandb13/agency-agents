@@ -90,6 +90,22 @@ class CouponCard(Flowable):
         c.drawCentredString(w / 2, pad + 8, 'MOM RESCUE PACK  \u2022  Gift Certificate')
 
 
+class CanvaCover(Flowable):
+    """Full-page Canva-exported cover. Header/footer is suppressed on this page."""
+    def __init__(self, path):
+        Flowable.__init__(self)
+        self._path = path
+    def wrap(self, aW, aH):
+        return aW, aH
+    def draw(self):
+        self.canv.drawImage(
+            self._path,
+            -(0.75 * inch), -(0.80 * inch),
+            width=Brand.W, height=Brand.H,
+            preserveAspectRatio=False, mask=None
+        )
+
+
 # ── 7-Day Week Grid ────────────────────────────────────────────────────────────
 def make_week_grid(styles):
     days  = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
@@ -125,6 +141,7 @@ class MomRescueBuilder:
     def __init__(self):
         self.styles = self._make_styles()
         self._has_cover = False  # set True by create_cover_page
+        self._skip_header_p1 = False  # True when full Canva cover PNG is used
 
     def _make_styles(self):
         def s(name, **kw):
@@ -168,6 +185,9 @@ class MomRescueBuilder:
     def _header_footer(self, canv, doc, title='Mom Rescue Pack'):
         canv.saveState()
         m, w, h = Brand.MARGIN, Brand.W, Brand.H
+        if self._skip_header_p1 and doc.page == 1:
+            canv.restoreState()
+            return
 
         # ── AI Premium Backgrounds (graceful fallback if absent) ─────────
         _cover_bg   = os.path.join('assets', 'backgrounds', 'cover_bg.png')
@@ -249,12 +269,18 @@ class MomRescueBuilder:
                   leftMargin=0.75*inch, rightMargin=0.75*inch,
                   topMargin=0.90*inch, bottomMargin=0.80*inch)
 
-        story = self.create_cover_page(
-            "Last-Minute Dad's Gift Kit",
-            '8 Heartfelt Coupons for Mom',
-            '$17',
-            'Because she deserves every single one.')
-        story.append(PageBreak())
+        _canva = os.path.join('assets', 'canva_covers', 'sku1.png')
+        if os.path.exists(_canva):
+            self._has_cover = True; self._skip_header_p1 = True
+            story = [CanvaCover(_canva), PageBreak()]
+        else:
+            self._skip_header_p1 = False
+            story = self.create_cover_page(
+                "Last-Minute Dad's Gift Kit",
+                '8 Heartfelt Coupons for Mom',
+                '$17',
+                'Because she deserves every single one.')
+            story.append(PageBreak())
 
         coupons = [
             ('One Day of Total Silence',       'Good for one blissful day of peace and quiet.'),
@@ -295,12 +321,18 @@ class MomRescueBuilder:
                   topMargin=0.90*inch, bottomMargin=0.80*inch)
 
         s     = self.styles
-        story = self.create_cover_page(
-            'Daily Sanity Planner',
-            'Your Weekly Self-Care System',
-            '$27',
-            '7 days. One calm, intentional week.')
-        story.append(PageBreak())
+        _canva = os.path.join('assets', 'canva_covers', 'sku2.png')
+        if os.path.exists(_canva):
+            self._has_cover = True; self._skip_header_p1 = True
+            story = [CanvaCover(_canva), PageBreak()]
+        else:
+            self._skip_header_p1 = False
+            story = self.create_cover_page(
+                'Daily Sanity Planner',
+                'Your Weekly Self-Care System',
+                '$27',
+                '7 days. One calm, intentional week.')
+            story.append(PageBreak())
 
         # Weekly overview grid
         story.append(Paragraph('Weekly Overview', s['section_hdr']))
@@ -507,7 +539,13 @@ class MomRescueBuilder:
                   leftMargin=0.75*inch, rightMargin=0.75*inch,
                   topMargin=0.90*inch, bottomMargin=0.80*inch)
         s     = self.styles
-        story = []
+        _canva = os.path.join('assets', 'canva_covers', 'sku4.png')
+        if os.path.exists(_canva):
+            self._has_cover = True; self._skip_header_p1 = True
+            story = [CanvaCover(_canva), PageBreak()]
+        else:
+            self._skip_header_p1 = False
+            story = []
 
         # ── Page 1: All About Mom Interview ───────────────────────────────────
         story.append(Paragraph('All About Mom', s['section_hdr']))
@@ -615,12 +653,18 @@ class MomRescueBuilder:
                   leftMargin=0.75*inch, rightMargin=0.75*inch,
                   topMargin=0.90*inch, bottomMargin=0.80*inch)
         s     = self.styles
-        story = self.create_cover_page(
-            'Mom Rescue Pack',
-            'Official User Manual — 2025 Edition',
-            '$37 Value',
-            'Everything you need to run this household like a pro.')
-        story.append(PageBreak())
+        _canva = os.path.join('assets', 'canva_covers', 'sku5.png')
+        if os.path.exists(_canva):
+            self._has_cover = True; self._skip_header_p1 = True
+            story = [CanvaCover(_canva), PageBreak()]
+        else:
+            self._skip_header_p1 = False
+            story = self.create_cover_page(
+                'Mom Rescue Pack',
+                'Official User Manual — 2025 Edition',
+                '$37 Value',
+                'Everything you need to run this household like a pro.')
+            story.append(PageBreak())
 
         # ── Page 2: Quick Reference / Emergency Protocols ─────────────────────
         story.append(Paragraph('Emergency Quick-Reference Guide', s['section_hdr']))
