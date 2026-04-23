@@ -212,8 +212,8 @@ class MomRescueBuilder:
             Brand.LOGO,
         ] if os.path.exists(f)), None)
         if _logo:
-            canv.drawImage(_logo, m + 4, h - m - 0.44*inch,
-                           width=0.30*inch, height=0.30*inch,
+            canv.drawImage(_logo, m + 2, h - m - 0.48*inch,
+                           width=0.42*inch, height=0.42*inch,
                            preserveAspectRatio=True, mask='auto')
 
         canv.setFont('Helvetica-Bold', 9)
