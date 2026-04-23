@@ -151,6 +151,17 @@ class MomRescueBuilder:
                              alignment=TA_CENTER, fontName='Helvetica'),
             'habit_label': s('hl', fontSize=9, textColor=HexColor('#6B2D5E'),
                              alignment=TA_LEFT, fontName='Helvetica-Bold'),
+            # Dark-background cover variants (used on page 1 over dark PNG)
+            'cover_title_dk': s('ctdk', fontSize=28, leading=35,
+                                textColor=HexColor('#FFFFFF'), alignment=TA_CENTER,
+                                spaceAfter=30, fontName='Helvetica-Bold', charSpace=1.5),
+            'cover_sub_dk':   s('csdk', fontSize=16, leading=20,
+                                textColor=HexColor('#F9B8C0'), alignment=TA_CENTER,
+                                spaceAfter=10, fontName='Helvetica-Oblique'),
+            'cover_price_dk': s('cpdk', fontSize=22, textColor=HexColor('#D4A574'),
+                                alignment=TA_CENTER, spaceAfter=4, fontName='Helvetica-Bold'),
+            'cover_tag_dk':   s('cgdk', fontSize=11, textColor=HexColor('#FFF8F0'),
+                                alignment=TA_CENTER, fontName='Helvetica'),
         }
 
     def _header_footer(self, canv, doc, title='Mom Rescue Pack'):
@@ -199,19 +210,20 @@ class MomRescueBuilder:
         canv.restoreState()
 
     def create_cover_page(self, title, subtitle, price, tagline):
-        s = self.styles
+        s  = self.styles
+        dk = os.path.exists(os.path.join('assets', 'backgrounds', 'cover_bg.png'))
         return [
             Spacer(1, 1.6 * inch),
-            HRFlowable(width='80%', thickness=2, color=Brand.GOLD,
+            HRFlowable(width='80%', thickness=1.5, color=Brand.GOLD,
                        spaceAfter=18, lineCap='round'),
-            Paragraph(title,    s['cover_title']),
-            Paragraph(subtitle, s['cover_sub']),
+            Paragraph(title,    s['cover_title_dk']   if dk else s['cover_title']),
+            Paragraph(subtitle, s['cover_sub_dk']     if dk else s['cover_sub']),
             Spacer(1, 0.2 * inch),
-            HRFlowable(width='40%', thickness=0.75, color=Brand.ROSE_GOLD, spaceAfter=10),
-            Paragraph(price,   s['cover_price']),
+            HRFlowable(width='40%', thickness=0.75, color=Brand.GOLD, spaceAfter=10),
+            Paragraph(price,   s['cover_price_dk']   if dk else s['cover_price']),
             Spacer(1, 0.15 * inch),
-            Paragraph(tagline, s['cover_tag']),
-            HRFlowable(width='80%', thickness=2, color=Brand.GOLD, spaceBefore=20),
+            Paragraph(tagline, s['cover_tag_dk']     if dk else s['cover_tag']),
+            HRFlowable(width='80%', thickness=1.5, color=Brand.GOLD, spaceBefore=20),
         ]
 
     # ── SKU 1: Last-Minute Dad's Gift Kit — Coupon Book ($17) ──────────────────
