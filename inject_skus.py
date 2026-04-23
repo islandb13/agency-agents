@@ -1,4 +1,8 @@
-# launch_build.py — Mom Rescue Pack | Run locally: python3 launch_build.py
+#!/usr/bin/env python3
+"""Writes the full launch_build.py with SKU 1 & 2 Platypus implementations."""
+import os
+
+LAUNCH = """# launch_build.py — Mom Rescue Pack | Run locally: python3 launch_build.py
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, PageBreak,
     Table, TableStyle, HRFlowable, KeepTogether, Flowable)
@@ -57,7 +61,7 @@ class CouponCard(Flowable):
         # Scissors line
         c.setFont('Helvetica', 7)
         c.setFillColor(HexColor('#D4A574'))
-        c.drawString(pad + 4, h - pad - 10, '\u2702  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014')
+        c.drawString(pad + 4, h - pad - 10, '\\u2702  \\u2014\\u2014\\u2014\\u2014\\u2014\\u2014\\u2014\\u2014\\u2014\\u2014\\u2014\\u2014')
 
         # Numbered badge
         c.setFillColor(HexColor('#6B2D5E'))
@@ -87,7 +91,7 @@ class CouponCard(Flowable):
         # Footer stamp
         c.setFont('Helvetica-Oblique', 7)
         c.setFillColor(HexColor('#B76E79'))
-        c.drawCentredString(w / 2, pad + 8, 'MOM RESCUE PACK  \u2022  Gift Certificate')
+        c.drawCentredString(w / 2, pad + 8, 'MOM RESCUE PACK  \\u2022  Gift Certificate')
 
 
 # ── 7-Day Week Grid ────────────────────────────────────────────────────────────
@@ -360,4 +364,12 @@ if __name__ == '__main__':
     b.build_coupon_book()
     print('Building SKU 2 ...')
     b.build_daily_planner()
-    print('\nAll done! Check the products/ folder.')
+    print('\\nAll done! Check the products/ folder.')
+"""
+
+with open('launch_build.py', 'w', encoding='utf-8') as f:
+    f.write(LAUNCH)
+
+size  = os.path.getsize('launch_build.py')
+lines = LAUNCH.count('\n')
+print(f'launch_build.py written — {size:,} bytes, {lines} lines')
