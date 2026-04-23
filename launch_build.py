@@ -152,16 +152,16 @@ class MomRescueBuilder:
                              alignment=TA_CENTER, fontName='Helvetica'),
             'habit_label': s('hl', fontSize=9, textColor=HexColor('#6B2D5E'),
                              alignment=TA_LEFT, fontName='Helvetica-Bold'),
-            # Dark-background cover variants (used on page 1 over dark PNG)
+            # Cover-with-background variants (used on page 1 over cover_bg.png)
             'cover_title_dk': s('ctdk', fontSize=28, leading=35,
-                                textColor=HexColor('#FFFFFF'), alignment=TA_CENTER,
+                                textColor=HexColor('#6B2D5E'), alignment=TA_CENTER,
                                 spaceAfter=30, fontName='Helvetica-Bold', charSpace=1.5),
             'cover_sub_dk':   s('csdk', fontSize=16, leading=20,
-                                textColor=HexColor('#F9B8C0'), alignment=TA_CENTER,
+                                textColor=HexColor('#B76E79'), alignment=TA_CENTER,
                                 spaceAfter=10, fontName='Helvetica-Oblique'),
-            'cover_price_dk': s('cpdk', fontSize=22, textColor=HexColor('#D4A574'),
+            'cover_price_dk': s('cpdk', fontSize=22, textColor=HexColor('#C4963A'),
                                 alignment=TA_CENTER, spaceAfter=4, fontName='Helvetica-Bold'),
-            'cover_tag_dk':   s('cgdk', fontSize=11, textColor=HexColor('#FFF8F0'),
+            'cover_tag_dk':   s('cgdk', fontSize=11, textColor=HexColor('#3A3A3A'),
                                 alignment=TA_CENTER, fontName='Helvetica'),
         }
 
@@ -179,22 +179,30 @@ class MomRescueBuilder:
             canv.drawImage(_content_bg, 0, 0, width=w, height=h,
                           preserveAspectRatio=False, mask=None)
 
-        # Plum header bar
-        canv.setFillColor(Brand.PLUM)
-        canv.rect(m, h - m - 0.45*inch, w - 2*m, 0.45*inch, fill=1, stroke=0)
+        # Gold double-rule header (Option D — Classic Gold Foil)
+        canv.setStrokeColor(Brand.GOLD)
+        canv.setLineWidth(1.8)
+        canv.line(m, h - m - 0.06*inch, w - m, h - m - 0.06*inch)
+        canv.setLineWidth(0.4)
+        canv.line(m, h - m - 0.12*inch, w - m, h - m - 0.12*inch)
 
         # Logo (embedded if present)
         if os.path.exists(Brand.LOGO):
-            canv.drawImage(Brand.LOGO, m + 4, h - m - 0.42*inch,
-                           width=0.38*inch, height=0.38*inch,
+            canv.drawImage(Brand.LOGO, m + 4, h - m - 0.44*inch,
+                           width=0.30*inch, height=0.30*inch,
                            preserveAspectRatio=True, mask='auto')
 
-        canv.setFont('Helvetica-Bold', 10)
-        canv.setFillColor(white)
-        canv.drawString(m + 0.48*inch, h - m - 0.29*inch, 'MOM RESCUE PACK')
+        canv.setFont('Helvetica-Bold', 9)
+        canv.setFillColor(Brand.PLUM)
+        canv.drawString(m + 0.42*inch, h - m - 0.32*inch, 'MOM RESCUE PACK')
 
-        canv.setFont('Helvetica', 9)
-        canv.drawRightString(w - m - 4, h - m - 0.29*inch, title)
+        canv.setFont('Helvetica-Oblique', 9)
+        canv.setFillColor(Brand.ROSE_GOLD)
+        canv.drawRightString(w - m - 4, h - m - 0.32*inch, title)
+
+        canv.setStrokeColor(Brand.GOLD)
+        canv.setLineWidth(0.4)
+        canv.line(m, h - m - 0.46*inch, w - m, h - m - 0.46*inch)
 
         # Gold footer rule
         canv.setStrokeColor(Brand.GOLD)
