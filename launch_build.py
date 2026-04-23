@@ -246,8 +246,8 @@ class MomRescueBuilder:
             self._header_footer(c, doc, "Last-Minute Dad's Gift Kit")
 
         doc = SimpleDocTemplate(path, pagesize=letter,
-                  leftMargin=m, rightMargin=m,
-                  topMargin=m + 0.6*inch, bottomMargin=m + 0.55*inch)
+                  leftMargin=0.75*inch, rightMargin=0.75*inch,
+                  topMargin=0.90*inch, bottomMargin=0.80*inch)
 
         story = self.create_cover_page(
             "Last-Minute Dad's Gift Kit",
@@ -291,8 +291,8 @@ class MomRescueBuilder:
             self._header_footer(c, doc, 'Daily Sanity Planner')
 
         doc = SimpleDocTemplate(path, pagesize=letter,
-                  leftMargin=m, rightMargin=m,
-                  topMargin=m + 0.6*inch, bottomMargin=m + 0.55*inch)
+                  leftMargin=0.75*inch, rightMargin=0.75*inch,
+                  topMargin=0.90*inch, bottomMargin=0.80*inch)
 
         s     = self.styles
         story = self.create_cover_page(
@@ -504,8 +504,8 @@ class MomRescueBuilder:
             self._header_footer(c, doc, 'Mom Activity Pack')
 
         doc = SimpleDocTemplate(path, pagesize=letter,
-                  leftMargin=m, rightMargin=m,
-                  topMargin=m + 0.6*inch, bottomMargin=m + 0.55*inch)
+                  leftMargin=0.75*inch, rightMargin=0.75*inch,
+                  topMargin=0.90*inch, bottomMargin=0.80*inch)
         s     = self.styles
         story = []
 
@@ -612,8 +612,8 @@ class MomRescueBuilder:
             self._header_footer(c, doc, 'Mom Rescue Pack Manual')
 
         doc = SimpleDocTemplate(path, pagesize=letter,
-                  leftMargin=m, rightMargin=m,
-                  topMargin=m + 0.6*inch, bottomMargin=m + 0.55*inch)
+                  leftMargin=0.75*inch, rightMargin=0.75*inch,
+                  topMargin=0.90*inch, bottomMargin=0.80*inch)
         s     = self.styles
         story = self.create_cover_page(
             'Mom Rescue Pack',
