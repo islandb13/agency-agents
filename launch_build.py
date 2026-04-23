@@ -665,7 +665,7 @@ class MomRescueBuilder:
             self._skip_header_p1 = False
             story = self.create_cover_page(
                 'Mom Rescue Pack',
-                'Official User Manual — 2025 Edition',
+                'Official User Manual — 2026 Edition',
                 '$37 Value',
                 'Everything you need to run this household like a pro.')
             story.append(PageBreak())
